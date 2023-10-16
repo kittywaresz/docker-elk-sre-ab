@@ -1,0 +1,19 @@
+# read from file and print to console
+
+# how to run:
+# docker run -it --rm --volume ./config_examples/example-1.yml:/usr/share/filebeat/filebeat.yml --volume /var/log/vbox-setup.log:/var/log/vbox-setup.log:ro elastic/filebeat:8.10.2 --e --strict.perms=false
+
+filebeat:
+  inputs:
+    - type: filestream
+      enabled: true
+      paths:
+        - /var/log/vbox-setup.log
+
+output:
+  console:
+    enabled: true
+    codec:
+      json:
+        pretty: true
+        escape_html: false

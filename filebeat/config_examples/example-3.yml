@@ -1,0 +1,21 @@
+# read from autodiscovered docker containers labeled with co.elastic.logs/enabled and print to console
+
+# how to run:
+# docker run -it --rm --user root --publish 5066:5066 --volume ./config_examples/example-2.yml:/usr/share/filebeat/filebeat.yml --volume /var/lib/docker/containers:/var/lib/docker/containers:ro --volume /var/run/docker.sock:/var/run/docker.sock:ro elastic/filebeat:8.10.2 --e --strict.perms=false
+
+logging.level: error
+
+http.host: 0.0.0.0
+http.port: 5066
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+output.console:
+  enabled: true
+  codec:
+    json:
+      pretty: true
+      escape_html: false

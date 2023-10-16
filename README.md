@@ -142,13 +142,13 @@ git clone https://github.com/deviantony/docker-elk.git
 Then, initialize the Elasticsearch users and groups required by docker-elk by executing the command:
 
 ```sh
-docker-compose up setup
+docker-compose up --build setup
 ```
 
 If everything went well and the setup completed without error, start the other stack components:
 
 ```sh
-docker-compose up
+docker-compose up --build
 ```
 
 > **Note**  
@@ -173,7 +173,7 @@ browser and use the following (default) credentials to log in:
 
 > **Note**  
 > Refer to [Security settings in Elasticsearch][es-security] to disable authentication.
-
+>
 > **Warning**  
 > Starting with Elastic v8.0.0, it is no longer possible to run Kibana using the bootstraped privileged `elastic` user.
 

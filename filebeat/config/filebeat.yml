@@ -1,0 +1,17 @@
+# https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-installation-configuration.html
+
+http.host: 0.0.0.0
+http.port: 5066
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints:
+        enabled: true
+
+output.logstash:
+  enabled: true
+  hosts:
+    - logstash:5044
+  username: filebeat_internal
+  password: ${FILEBEAT_INTERNAL_PASSWORD}
