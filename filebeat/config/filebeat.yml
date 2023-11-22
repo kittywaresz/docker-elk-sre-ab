@@ -8,6 +8,22 @@ filebeat.autodiscover:
     - type: docker
       hints:
         enabled: true
+      templates:
+        - condition:
+            contains:
+              docker.container.name: oncall-web
+          config:
+            # input goes here
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+              processors:
+                - dissect:
+                    tokenizer: "%{ipishka} - - [%{datetishka}] %{method} %{path} %{protocol} %{status_code} %{size} %{referer} %{user_agent}"
+                    target_prefix: extra
+                    trim_values: all
+
+        # todo: add mysql later
 
 output.logstash:
   enabled: true

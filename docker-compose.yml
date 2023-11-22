@@ -133,4 +133,4 @@ services:
       - co.elastic.logs/enabled=false
 
 volumes:
-  elasticsearch:
+  elasticsearch: ~
