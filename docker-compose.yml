@@ -54,6 +54,9 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    networks:
+      - default
+      - oncall_common
     environment:
       node.name: elasticsearch
       ES_JAVA_OPTS: -Xms512m -Xmx512m
@@ -134,3 +137,12 @@ services:
 
 volumes:
   elasticsearch: ~
+
+# https://docs.docker.com/compose/networking/
+
+# docker network create --driver bridge oncall_common
+# to check DNS resolving - docker run --rm --network oncall_common busybox nslookup grafana
+
+networks:
+  oncall_common:
+    external: true
